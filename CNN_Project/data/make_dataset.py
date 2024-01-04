@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import Dataset
 from pathlib import Path
 import os
-
+from torch.utils.data import DataLoader
 
 class CorruptMNISTDataset(Dataset):
     def __init__(self, image_files, target_files):
@@ -22,7 +22,7 @@ class CorruptMNISTDataset(Dataset):
 def mnist():
     # Define the path to the dataset files
     data_path = Path(
-        "/mnt/c/Users/chris/OneDrive/Dokumenter/Skole/Universitet/Kandidat/1Semester/MachineLearningOperations/dtu_mlops/data/corruptmnist"
+        "data/raw/corruptmnist"
     )
 
     # Define training and testing file names
@@ -35,13 +35,20 @@ def mnist():
     train_dataset = CorruptMNISTDataset(train_image_files, train_target_files)
     test_dataset = CorruptMNISTDataset([test_image_file], [test_target_file])
 
-    # Create data loaders
+    
 
     torch.save(train_image_files, "data/processed/train_image_files.pth")
     torch.save(train_target_files, "data/processed/train_target_files.pth")
 
     torch.save(test_image_file, "data/processed/test_image_file.pth")
     torch.save(test_target_file, "data/processed/test_target_file.pth")
+    
+    # Create data loaders
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
+
+    torch.save(train_loader, "data/processed/train_loader.pth")
+    torch.save(test_loader, "data/processed/test_loader.pth")
 
     return train_dataset, test_dataset
 
@@ -49,7 +56,7 @@ def mnist():
 if __name__ == "__main__":
     mnist()
 
-    print(os.getcwd())
+#     print(os.getcwd())
 
     # Save datasets
     # torch.save(train_dataset, 'data/processed/train_dataset.pth')
