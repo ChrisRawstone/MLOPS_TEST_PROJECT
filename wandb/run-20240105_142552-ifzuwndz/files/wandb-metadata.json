@@ -1,0 +1,148 @@
+{
+    "os": "Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.11.5",
+    "heartbeatAt": "2024-01-05T13:25:53.097141",
+    "startedAt": "2024-01-05T13:25:52.125013",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/mnt/c/Users/chris/OneDrive/Dokumenter/Skole/Universitet/Kandidat/1Semester/MachineLearningOperations/CNN_Predicter_Project/CNN_Project/train_model.py",
+    "codePathLocal": "CNN_Project/train_model.py",
+    "codePath": "CNN_Project/train_model.py",
+    "git": {
+        "remote": "https://github.com/ChrisRawstone/ML_OPS_CNN_TEST_PROJECT.git",
+        "commit": "dda0a298386e2628aaeb71bc7ad18574b8b6f452"
+    },
+    "email": "dr.rawstone@outlook.com",
+    "root": "/mnt/c/Users/chris/OneDrive/Dokumenter/Skole/Universitet/Kandidat/1Semester/MachineLearningOperations/CNN_Predicter_Project",
+    "host": "Rawstone",
+    "username": "chris",
+    "executable": "/home/chris/miniconda3/envs/my_environment/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 20,
+    "cpu_freq": {
+        "current": 2918.3989999999994,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2918.399,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 22.599117279052734
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+            "memory_total": 6439305216
+        }
+    ],
+    "memory": {
+        "total": 7.5960540771484375
+    }
+}

@@ -3,18 +3,21 @@ from models.model import MyNeuralNet
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 from data.make_dataset import CorruptMNISTDataset
-
+import wandb
+import logging
+from rich.logging import RichHandler
+wandb.login(key="cc9eaf6580b2ef9ef475fc59ba669b2de0800b92")
+wandb.init(project="cnn-project", entity="Rawstone")
 
 torch.manual_seed(42)
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
-def load_files():
-    train_image_files = torch.load("data/processed/train_image_files.pth")
-    train_target_files = torch.load("data/processed/train_target_files.pth")
-    test_image_file = torch.load("data/processed/test_image_file.pth")
-    test_target_file = torch.load("data/processed/test_target_file.pth")
+rich_handler = RichHandler(markup=True)
+rich_handler.setFormatter(logging.Formatter("%(message)s"))  # minimal formatter
+logger.addHandler(rich_handler)
 
-    return train_image_files, train_target_files, test_image_file, test_target_file
 
 
 if __name__ == "__main__":
@@ -31,14 +34,12 @@ if __name__ == "__main__":
         print("Running on the CPU")
     
 
-
     model = MyNeuralNet(1, 10).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.00045)
     loss_fn = torch.nn.CrossEntropyLoss()
 
     loss_list = []
-    print("test")
 
     for epoch in range(10):
         for i, (image, label) in enumerate(train_loader):
@@ -46,14 +47,16 @@ if __name__ == "__main__":
 
             optimizer.zero_grad()
             y_hat = model(image)
+            
             loss = loss_fn(y_hat, label)
             loss.backward()
             optimizer.step()
 
-        print(f"Epoch {epoch}, Loss: {loss.item()}")
+        logger.info(f"Epoch {epoch}, Loss: {loss.item()}")
+        wandb.log({"epoch": epoch,"loss": loss.item()})
         loss_list.append(loss.item())
 
-    plt.plot(loss_list)
+    # plt.plot(loss_list)
     # plt.show()
 
     plt.savefig("reports/figures/loss.png")
@@ -74,3 +77,4 @@ if __name__ == "__main__":
     print(f"Accuracy of the network on the {total} test images: {100 * correct / total} %")
 
     torch.save(model, "models/model.pt")
+
