@@ -20,7 +20,7 @@ COPY reports/ reports/
 COPY models/ models/
 
 RUN pip install . --no-deps --no-cache-dir
-ENV WANDB_API_KEY=
+# ENV WANDB_API_KEY=
 
 
 ENTRYPOINT ["python", "-u", "CNN_Project/train_model.py"]

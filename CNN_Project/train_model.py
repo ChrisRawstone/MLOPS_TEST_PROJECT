@@ -6,6 +6,9 @@ from data.make_dataset import CorruptMNISTDataset
 import wandb
 import logging
 from rich.logging import RichHandler
+from pytorch_lightning import Trainer
+from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
+
 wandb.login(key="cc9eaf6580b2ef9ef475fc59ba669b2de0800b92")
 wandb.init(project="cnn-project", entity="Rawstone")
 
@@ -36,25 +39,29 @@ if __name__ == "__main__":
 
     model = MyNeuralNet(1, 10).to(device)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.00045)
-    loss_fn = torch.nn.CrossEntropyLoss()
 
-    loss_list = []
+    
+    # checkpoint_callback = ModelCheckpoint(dirpath="./models", monitor="val_loss", mode="min")
+    # early_stopping_callback = EarlyStopping(monitor="val_loss", patience=3, verbose=True, mode="min")
+    
 
-    for epoch in range(10):
-        for i, (image, label) in enumerate(train_loader):
-            image, label = image.to(device), label.to(device)
+    trainer = Trainer(max_epochs=10)
+    trainer.fit(model, train_loader)
 
-            optimizer.zero_grad()
-            y_hat = model(image)
+    # for epoch in range(10):
+    #     for i, (image, label) in enumerate(train_loader):
+    #         image, label = image.to(device), label.to(device)
+
+    #         optimizer.zero_grad()
+    #         y_hat = model(image)
             
-            loss = loss_fn(y_hat, label)
-            loss.backward()
-            optimizer.step()
+    #         loss = loss_fn(y_hat, label)
+    #         loss.backward()
+    #         optimizer.step()
 
-        logger.info(f"Epoch {epoch}, Loss: {loss.item()}")
-        wandb.log({"epoch": epoch,"loss": loss.item()})
-        loss_list.append(loss.item())
+    #     logger.info(f"Epoch {epoch}, Loss: {loss.item()}")
+    #     wandb.log({"epoch": epoch,"loss": loss.item()})
+    #     loss_list.append(loss.item())
 
     # plt.plot(loss_list)
     # plt.show()

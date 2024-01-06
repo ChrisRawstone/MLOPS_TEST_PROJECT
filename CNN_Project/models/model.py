@@ -2,9 +2,9 @@ import torch
 
 
 import torch.nn as nn
+from pytorch_lightning import LightningModule
 
-
-class MyNeuralNet(nn.Module):
+class MyNeuralNet(LightningModule):
     """Basic neural network class.
 
     Args:
@@ -29,6 +29,8 @@ class MyNeuralNet(nn.Module):
 
         self.fc2 = nn.Linear(256, out_features)
         self.softmax = nn.Softmax(dim=1)
+
+        self.criterium = nn.CrossEntropyLoss()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass of the model.
@@ -59,3 +61,13 @@ class MyNeuralNet(nn.Module):
         # x = self.softmax(x)
 
         return x
+    
+    def training_step(self,batch,batch_idx):
+        data, target = batch
+        preds = self(data)
+        loss = self.criterium(preds,target)
+        return loss
+
+    def configure_optimizers(self):
+        optimizer = torch.optim.Adam(self.parameters(), lr=0.00045)
+        return optimizer
