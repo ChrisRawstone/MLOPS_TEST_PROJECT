@@ -11,8 +11,6 @@ import wandb
 from CNN_Project.data.make_dataset import CorruptMNISTDataset
 from CNN_Project.models.model import MyNeuralNet
 
-
-
 torch.manual_seed(42)
 
 logger = logging.getLogger(__name__)
