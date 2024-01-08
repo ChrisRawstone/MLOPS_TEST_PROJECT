@@ -20,9 +20,9 @@ class CorruptMNISTDataset(Dataset):
         return image, target
 
 
-def mnist():
+def mnist(path="data/raw/corruptmnist"):
     # Define the path to the dataset files
-    data_path = Path("data/raw/corruptmnist")
+    data_path = Path(path)
 
     # Define training and testing file names
     train_image_files = sorted(data_path.glob("train_images_*.pt"))

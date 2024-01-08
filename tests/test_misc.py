@@ -4,10 +4,12 @@ from torch.utils.data import DataLoader
 from CNN_Project.data.make_dataset import CorruptMNISTDataset, mnist
 from CNN_Project.models.model import MyNeuralNet
 from CNN_Project.train_model import get_accuracy, train_model
+import os.path
+import pytest
 
-
+@pytest.mark.skipif(not os.path.exists("data/raw/corruptmnist"), reason="Data files not found")
 def test_make_mnist():
-    train_dataset, test_dataset = mnist()
+    train_dataset, test_dataset = mnist("data/raw/corruptmnist")
 
     assert len(train_dataset) == 30000
     assert len(test_dataset) == 5000
@@ -19,7 +21,7 @@ def test_make_mnist():
     # assert that all labels are represented
     assert set(train_dataset.targets.unique().tolist()) == set(range(10))
 
-
+@pytest.mark.skipif(not os.path.exists("data/processed/train_loader.pth"), reason="Data files not found")
 def test_train_model():
     # evaluate model
     train_loader = torch.load("data/processed/train_loader.pth")
@@ -48,7 +50,7 @@ def test_train_model():
 
     assert accuracy > 90.0
 
-
+@pytest.mark.skipif(not os.path.exists("models/model.pt"), reason="models not found")
 def test_prediction_of_test_set():
     model = MyNeuralNet(1, 10)
     model.load_state_dict(torch.load("models/model.pt"))

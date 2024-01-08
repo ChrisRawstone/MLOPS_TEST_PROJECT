@@ -57,6 +57,11 @@ def train_model(train_loader, model, device, wandb_enabled):
 
 
 if __name__ == "__main__":
+    wandb_enabled = True
+
+    if wandb_enabled:
+        wandb.init(project="cnn-project", entity="Rawstone")
+
     # Get our data
     train_loader = torch.load("data/processed/train_loader.pth")
     test_loader = torch.load("data/processed/test_loader.pth")
