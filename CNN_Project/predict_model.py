@@ -1,6 +1,8 @@
 import torch
 from torch.utils.data import DataLoader
-from data.make_dataset import CorruptMNISTDataset
+
+from CNN_Project.data.make_dataset import CorruptMNISTDataset
+from CNN_Project.models.model import MyNeuralNet
 
 
 def predict(model: torch.nn.Module, dataloader: torch.utils.data.DataLoader) -> None:
@@ -14,8 +16,6 @@ def predict(model: torch.nn.Module, dataloader: torch.utils.data.DataLoader) -> 
         Tensor of shape [N, d] where N is the number of samples and d is the output dimension of the model
 
     """
-
-
     predictions = []
 
     for batch in dataloader:
@@ -25,27 +25,16 @@ def predict(model: torch.nn.Module, dataloader: torch.utils.data.DataLoader) -> 
 
     return torch.cat(predictions, 0)
 
-    
-
 
 if __name__ == "__main__":
-
     # Load model
-    model = torch.load("models/model.pt")
+    model = MyNeuralNet(1, 10)
+    model.load_state_dict(torch.load("models/model.pt"))
 
-    # Set model to cpu
-    model = model.cpu()
-    
     # Load datasets
-    testLoader = torch.load('data/processed/test_loader.pth')
-
-    # Recreate DataLoaders
-    # testLoader = DataLoader(test_dataset, batch_size=64, shuffle=False)
+    testLoader = torch.load("data/processed/test_loader.pth")
 
     # Run prediction
     y_pred = predict(model, testLoader)
 
     print("Done")
-
-    # Save prediction
-    # torch.save(y_pred, "data/predictions/prediction.pth")

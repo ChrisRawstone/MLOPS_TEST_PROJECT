@@ -1,8 +1,7 @@
 import torch
-
-
 import torch.nn as nn
 from pytorch_lightning import LightningModule
+
 
 class MyNeuralNet(LightningModule):
     """Basic neural network class.
@@ -61,11 +60,11 @@ class MyNeuralNet(LightningModule):
         # x = self.softmax(x)
 
         return x
-    
-    def training_step(self,batch,batch_idx):
+
+    def training_step(self, batch, batch_idx):
         data, target = batch
         preds = self(data)
-        loss = self.criterium(preds,target)
+        loss = self.criterium(preds, target)
         return loss
 
     def configure_optimizers(self):
