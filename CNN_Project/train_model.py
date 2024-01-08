@@ -11,7 +11,7 @@ import wandb
 from CNN_Project.data.make_dataset import CorruptMNISTDataset
 from CNN_Project.models.model import MyNeuralNet
 
-wandb.init(project="cnn-project", entity="Rawstone")
+
 
 torch.manual_seed(42)
 
@@ -41,8 +41,11 @@ def get_accuracy(model, test_loader, device):
     return 100 * correct / total
 
 
-def train_model(train_loader, model, device):
+def train_model(train_loader, model, device, wandb_enabled):
     # Get our data
+    if wandb_enabled:
+        wandb.init(project="cnn-project", entity="Rawstone")
+
     train_loader = torch.load("data/processed/train_loader.pth")
 
     model = MyNeuralNet(1, 10).to(device)

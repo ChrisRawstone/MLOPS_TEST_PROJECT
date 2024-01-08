@@ -34,7 +34,7 @@ def test_train_model():
 
     model = MyNeuralNet(1, 10).to(device)
 
-    model = train_model(train_loader, model, device)
+    model = train_model(train_loader, model, device, wandb_enabled=False)
 
     # evaluate model
     model.eval()
