@@ -7,7 +7,8 @@ from CNN_Project.train_model import get_accuracy, train_model
 import os.path
 import pytest
 
-@pytest.mark.skipif(not os.path.exists("data/raw/corruptmnist"), reason="Data files not found")
+
+@pytest.mark.skipif(not os.path.exists("data/raw/corruptmnist"), reason="Some data files not found")
 def test_make_mnist():
     train_dataset, test_dataset = mnist("data/raw/corruptmnist")
 
