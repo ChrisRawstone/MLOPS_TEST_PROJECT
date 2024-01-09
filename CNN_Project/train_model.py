@@ -55,7 +55,7 @@ def train_model(train_loader, model, device, wandb_enabled):
 
 
 if __name__ == "__main__":
-    wandb_enabled = True
+    wandb_enabled = False
 
     if wandb_enabled:
         wandb.init(project="cnn-project", entity="Rawstone")
@@ -68,13 +68,13 @@ if __name__ == "__main__":
 
     model = MyNeuralNet(1, 10).to(device)
 
-    model = train_model(train_loader, test_loader, model)
+    model = train_model(train_loader, model, device, wandb_enabled)
 
     # evaluate model
     model.eval()
 
     # get accuracy
-    accuracy = get_accuracy(model, test_loader)
+    accuracy = get_accuracy(model, test_loader, device)
 
     print(f"Accuracy: {accuracy:.2f}%")
 
