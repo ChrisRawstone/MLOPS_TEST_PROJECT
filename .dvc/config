@@ -1,4 +1,7 @@
 [core]
-    remote = storage
+    remote = remote_storage
 ['remote "storage"']
     url = gdrive://1NzgD1thgxCvM4SnxGLrIEpt65DxuWssL
+['remote "remote_storage"']
+    url = gs://mlops_mnist_data_bucket/
+    version_aware = true
