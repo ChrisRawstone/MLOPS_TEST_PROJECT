@@ -23,7 +23,7 @@ logger.addHandler(rich_handler)
 
 def get_accuracy(model, test_loader, device):
     # evaluate model
-    model.eval()
+    model.eval().to(device)
 
     # get accuracy
     correct = 0
@@ -64,7 +64,8 @@ if __name__ == "__main__":
     train_loader = torch.load("data/processed/train_loader.pth")
     test_loader = torch.load("data/processed/test_loader.pth")
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("mps")
 
     model = MyNeuralNet(1, 10).to(device)
 
