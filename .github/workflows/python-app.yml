@@ -50,6 +50,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install torch==${{ matrix.pytorch-version }}
         pip install -r requirements.txt
+        pip install dvc_gs
     - uses: iterative/setup-dvc@v1
     - name: Get data
       run: dvc pull
