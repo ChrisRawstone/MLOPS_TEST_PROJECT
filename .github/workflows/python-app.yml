@@ -54,7 +54,8 @@ jobs:
     - uses: iterative/setup-dvc@v1
     - name: Get data
       run: |
-        gcloud auth activate-service-account --key-file=BUCKET_KEY
+        echo "${{ secrets.BUCKET_KEY }}" > service-account-key.json
+        gcloud auth activate-service-account --key-file=service-account-key.json
         dvc pull
       env:
         BUCKET_KEY: ${{ secrets.BUCKET_KEY }}
