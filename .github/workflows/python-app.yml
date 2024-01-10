@@ -53,9 +53,11 @@ jobs:
         pip install dvc_gs
     - uses: iterative/setup-dvc@v1
     - name: Get data
-      run: dvc pull
+      run: |
+        gcloud auth activate-service-account --key-file=
+        dvc pul
       env:
-        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.BUCKET_KEY }}
     - name: Test with pytest
       run: |
         pytest
